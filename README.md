@@ -6,8 +6,7 @@ I was thinking of build an app using the UFC Api. The app would allow users to l
 ![wireframe](https://github.com/nickykwn/project4/blob/master/wireframes/wireframe1.png)
 ### User Favorite Fighter Page
 ![fav-fighter](https://github.com/nickykwn/project4/blob/master/wireframes/favorite%20fighter%20page.png)
-####
-Will be adding another wireframe for upcoming UFC events information
+### Will be adding another wireframe for upcoming UFC events information
 
 Technology
 * HTML
