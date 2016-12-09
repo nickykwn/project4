@@ -50,9 +50,10 @@ module.exports = {
       { test: /\.jpg$/,
         loader: 'file-loader?name=/img/[name].[hash:base64:5].[ext]'
       },
-      {
-        test: /\.(js|jsx)$/,
-        loader: 'babel'
+      { test: /\.jsx?$/, exclude: /node_modules/, loader: "babel", query:
+        {
+          presets:['react', 'es2015']
+        }
       },
       {
         test: /\.otf(\?v=\d+\.\d+\.\d+)?$/,
