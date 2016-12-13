@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import Fighter from './Fighter/Fighter.jsx';
+// import Fighter from './Fighter/Fighter.jsx';
 import FighterList from './FighterList/FighterList.jsx';
 
 class App extends Component {
@@ -13,7 +13,7 @@ class App extends Component {
   }
 
   getFighters() {
-    fetch('/fighters')
+    fetch('/api/fighters')
     .then(r => r.json())
     .then((data) => {
       this.setState({
@@ -28,9 +28,12 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-        <h1>UFC</h1>
-        <Fighter
-
+        <header>
+        <h1>The Ultimate Fighting Championship</h1>
+        </header>
+        <FighterList
+          fighters={this.state.fighters}
+          getFighters={this.getFighters.bind(this)}
         />
         </div>
       </div>

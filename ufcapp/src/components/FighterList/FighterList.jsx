@@ -12,8 +12,9 @@ class FighterList extends Component {
     return this.props.fighters.map((fighter, i) =>
       <FighterItem
         key={i}
-        name={puppy.name}
-        url={puppy.url}
+        f_name={fighter.first_name}
+        l_name={fighter.last_name}
+        url={fighter.thumbnail}
         />
     );
   }
