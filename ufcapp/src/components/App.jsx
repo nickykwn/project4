@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Fighter from './Fighter/Fighter.jsx';
+import FighterList from './FighterList/FighterList.jsx';
 
 class App extends Component {
   constructor() {
@@ -29,8 +30,7 @@ class App extends Component {
         <div className="App-header">
         <h1>UFC</h1>
         <Fighter
-        getFighters={()=> this.getFighters()}
-        fighters={this.state.fighters.first_name}
+
         />
         </div>
       </div>

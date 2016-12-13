@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Fighter.css';
+import FighterItem from '../FighterItem/FighterItem.jsx';
 
 class Fighter extends Component {
 
@@ -7,15 +8,9 @@ class Fighter extends Component {
     this.props.getFighters();
   }
 
-  renderFighters() {
-    return this.props.fighters.map((fighter, i) =>
-
-  }
-}
-
   render(){
     return (
-      <div id=['fighter-list']>
+      <div id="fighter-list">
         {this.renderFighters()}
       </div>
     );
