@@ -17,6 +17,6 @@ app.use(cookieParser());
 
 app.use(bodyParser.json());
 
-app.use('/fighters', fightersRouter);
+app.use('/api/fighters', fightersRouter);
 
 app.listen(PORT, () => console.log('server here! listening on', PORT));
