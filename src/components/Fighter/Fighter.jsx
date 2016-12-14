@@ -4,10 +4,6 @@ import FighterItem from '../FighterItem/FighterItem.jsx';
 
 class Fighter extends Component {
 
-  componentWillMount() {
-    this.props.getFighters();
-  }
-
   render(){
     return (
       <div id="fighter-list">

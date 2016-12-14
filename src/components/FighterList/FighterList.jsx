@@ -4,10 +4,6 @@ import './FighterList.css';
 
 class FighterList extends Component {
 
-  componentWillMount() {
-    this.props.getFighters();
-  }
-
   renderFighters() {
     return this.props.fighters.map((fighter, i) =>
       <FighterItem

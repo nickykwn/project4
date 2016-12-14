@@ -1,4 +1,4 @@
-const db = require('../db/db.js');
+const db = require('./db.js');
 
 function getFavorites(req, res, next) {
   db.any('SELECT * FROM fav_fighters WHERE username = $1;', [req.params.username])

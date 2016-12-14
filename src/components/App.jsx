@@ -180,6 +180,19 @@ loginFunctions(username) {
   this.handleLogIn();
 }
 
+deletedSaved(id) {
+  fetch(`/fighters/${id}`, {
+    method: 'delete'
+  })
+  .then(() => {
+    const SavedFighters = this.state.SavedFighters.filter((image) => {
+      return image.id !==id;
+    });
+      this.setState({ SavedFighters });
+    })
+  .catch(err => console.log(err));
+}
+
   render() {
     return (
       <div className="App">

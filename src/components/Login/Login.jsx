@@ -18,7 +18,7 @@ class Login extends Component {
           value={this.props.logInPassword}
           onChange={this.props.updateFormPassword}
         />
-        <div className="formbutton" onClick={this.props.logInFunctions}>
+        <div className="formbutton" onClick={this.props.loginFunctions}>
           log in
         </div>
       </div>

@@ -1,7 +1,6 @@
 const fetch = require('node-fetch');
 
 function getFighters(req, res, next) {
-  console.log('inside get fighters')
   fetch(`http://ufc-data-api.ufc.com/api/v1/us/fighters`)
   .then(r => r.json())
   .then((result) => {

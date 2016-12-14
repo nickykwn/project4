@@ -1,11 +1,10 @@
 const router = require('express').Router();
-const { getFighters } = require('../services/fighters');
-const { saveFighters, removeFighter} = require('../models/fighter.js');
+const { saveFighters, getFavorites, removeFighter} = require('../models/fighters');
 
 // handles all the routes
 
 // get all the fighters
-router.get('/', getFighters, (req, res) => {
+router.get('/:username', getFavorites, (req, res) => {
   res.json(res.fighters || []);
 });
 
