@@ -157,6 +157,29 @@ saveFighters(int, int2, int3, int4, text, text2, text3, text4, url, username) {
   .catch(err => console.log(err));
 }
 
+getSavedFighters(username) {
+  return fetch(`/fighters/${username}`, {
+    method: 'GET'
+  })
+  .then(r => r.json())
+  .then((data) => {
+    this.setState({
+      savedImages: data
+    });
+  })
+  .catch(err => console.log(err));
+}
+
+handleSaveClick(int, int2, int3, int4, text, text2, text3, text4, url, username) {
+  this.saveFighters(int, int2, int3, int4, text, text2, text3, text4, url, username);
+  setTimeout(() => {this.getSavedFighters(username)}, 300);
+}
+
+loginFunctions(username) {
+  this.getSavedFighters(username);
+  this.handleLogIn();
+}
+
   render() {
     return (
       <div className="App">
@@ -164,11 +187,40 @@ saveFighters(int, int2, int3, int4, text, text2, text3, text4, url, username) {
         <header>
         <h1>The Ultimate Fighting Championship</h1>
         </header>
-        <FighterList
-          fighters={this.state.fighters}
-          getFighters={this.getFighters.bind(this)}
-        />
-        </div>
+          <div className="login-container">
+            <SignUp
+              signUpFormDisplay={this.state.signUpFormDisplay}
+              signUpUsername={this.state.signup.username}
+              signUpPassword={this.state.signup.password}
+              updateFormUsername={event => this.updateFormSignUpUsername(event)}
+              updateFormPassword={event => this.updateFormSignUpPassword(event)}
+              handleFormSubmit={() => this.handleSignUp()}
+            />
+            <Login
+              logInFormDisplay={this.state.logInFormDisplay}
+              loginFunctions={() => this.loginFunctions(this.state.login.username)}
+              className={this.state.login.loggedIn ? 'hidden' : ''}
+              logInUsername={this.state.login.username}
+              logInPassWord={this.state.login.password}
+              updateFormUsername={event => this.updateFormLogInUsername(event)}
+              updateFormPassword={event => this.updateFormLogInPassword(event)}
+              handleFormSubmit={() => this.handleLogIn()}
+              getSavedFighters={() => this.getSavedFighters()}
+            />
+          </div>
+            <div className="fighter-container">
+              <FighterList
+                fighters={this.state.fighters}
+                getFighters={this.getFighters.bind(this)}
+              />
+            </div>
+          </div>
+            <SavedFighters
+              username={this.state.username}
+              getSavedFighters={this.getSavedFighters.bind(this)}
+              deletedSaved={this.deletedSaved.bind(this)}
+              SavedFighters={this.state.SavedFighters}
+            />
       </div>
     );
   }

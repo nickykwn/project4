@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './LogIn.css';
+import './Login.css';
 
-class LogIn extends Component {
+class Login extends Component {
 
   render(){
     return (
@@ -26,4 +26,4 @@ class LogIn extends Component {
   }
 }
 
-export default LogIn;
+export default Login;

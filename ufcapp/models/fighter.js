@@ -1,4 +1,4 @@
-const db = require('./db.js');
+const db = require('../db/db.js');
 
 function getFavorites(req, res, next) {
   db.any('SELECT * FROM fav_fighters WHERE username = $1;', [req.params.username])
@@ -20,7 +20,17 @@ function saveFighters(req, res, next) {
   .catch(err => next(err));
 }
 
+function removeFighter(req, res, next) {
+  db.none(`DELETE FROM fav_fighters WHERE username = $1;`, [req.params.username])
+  .then((fighters) => {
+    res.fighters = fighters;
+    next();
+  })
+  .catch(error => next(error));
+}
+
 module.exports = {
   saveFighters,
-  getFavorites
+  getFavorites,
+  removeFighter
 };
