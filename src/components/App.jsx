@@ -218,7 +218,7 @@ loginFunctions(username) {
             <SavedFighters
               username={this.state.username}
               getSavedFighters={this.getSavedFighters.bind(this)}
-              deletedSaved={this.deletedSaved.bind(this)}
+              // deletedSaved={this.deletedSaved.bind(this)}
               SavedFighters={this.state.SavedFighters}
             />
       </div>
