@@ -1,5 +1,6 @@
 const router = require('express').Router();
-const { getFighters, saveFighter, removeFighter } = require('../services/fighters');
+const { getFighters, removeFighter } = require('../services/fighters');
+const { saveFighters } = require('../models/fighters.js');
 
 // handles all the routes
 
@@ -8,9 +9,9 @@ router.get('/', getFighters, (req, res) => {
   res.json(res.fighters || []);
 });
 
-// router.get('/', saveFighter, (req, res) => {
-//   res.json({ message: 'Fighter has been added to favorites!'});
-// });
+router.post('/', (req, res) => {
+  res.json({ message: 'Fighter has been added to favorites!'});
+});
 
 // router.delete('/:id', removeFighter, (req, res) => {
 //   res.json({ message: 'deleted' })

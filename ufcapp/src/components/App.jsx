@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import './App.css';
 // import Fighter from './Fighter/Fighter.jsx';
 import Login from './Login/Login.jsx';
-import SavedFighters from './SavedFighters/SavedFighters.jsx';
+import SignUp from './SignUp/SignUp.jsx';
 import FighterList from './FighterList/FighterList.jsx';
+import SavedFighters from './SavedFighters/SavedFighters.jsx';
 import SavedFightersItem from './SavedFightersItem/SavedFightersItem.jsx';
 
 class App extends Component {
@@ -12,9 +13,6 @@ class App extends Component {
 
     this.state = {
       fighters: [],
-      DeleteButton: DeleteButton,
-      Save: Save,
-      User: User,
       signup: {
         username: '',
         password: ''
@@ -41,6 +39,7 @@ class App extends Component {
     .catch((err) => console.log(err))
   }
 
+///////////////// Rafa's(@rapala61) User Auth Code //////////////////////////////
   updateFormSignUpUsername(e) {
     console.log(e.target.value);
     this.setState({
@@ -85,7 +84,7 @@ class App extends Component {
         'Content-Type': 'application/json'
       },
       method: 'POST',
-      body.JSON.stringify({
+      body: JSON.stringify({
         username: this.state.signup.username,
         password: this.state.signup.password
       })
@@ -133,6 +132,30 @@ class App extends Component {
   alertInfo(msg) {
     alert(msg);
   }
+
+////////////////////////////////////////////////////////
+
+saveFighters(int, int2, int3, int4, text, text2, text3, text4, url, username) {
+  return fetch(`/fighters`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      'int': int,
+      'int2': int2,
+      'int3': int3,
+      'int4': int4,
+      'text': text,
+      'text2': text2,
+      'text3': text3,
+      'text4': text4,
+      'url': url,
+      'username': username
+    })
+  })
+  .catch(err => console.log(err));
+}
 
   render() {
     return (
