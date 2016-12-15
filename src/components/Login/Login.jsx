@@ -5,7 +5,7 @@ class Login extends Component {
 
   render(){
     return (
-      <div className={this.props.logInFormDisplay}>
+      <div id='form-container'>
         <input
           type="text"
           placeholder="username"
@@ -18,9 +18,9 @@ class Login extends Component {
           value={this.props.logInPassword}
           onChange={this.props.updateFormPassword}
         />
-        <div className="formbutton" onClick={this.props.logInFunctions}>
-          log in
-        </div>
+        <button onClick={this.props.handleFormSubmit}>
+          Log in!
+        </button>
       </div>
     );
   }

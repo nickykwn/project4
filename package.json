@@ -8,17 +8,17 @@
     "clean": "rm -rf dist && rm -rf node_modules",
     "heroku-prebuild": "bash ./scripts/deployment_react.sh",
     "heroku-postbuild": "bash ./scripts/deployment_cleanup.sh",
-    "start": "node server.js",
     "rebuild": "webpack -d --progress --colors",
     "watch": "webpack -d --progress --watch",
     "eject": "react-scripts eject"
+
   },
   "engines": {
     "node": "7.0.0"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/nickykwn/project4"
+    "url": "https://github.com/nickykwn/ufcapp"
   },
   "author": "Nicky Kwan",
   "license": "SEE LICENSE IN LICENSE",
@@ -60,7 +60,7 @@
     "html-webpack-plugin": "^2.22.0",
     "html-webpack-template": "^5.0.0",
     "postcss-loader": "^1.1.1",
-    "react": "^15.3.0",
+    "react": "^15.4.1",
     "react-dom": "^15.3.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",

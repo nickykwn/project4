@@ -23,7 +23,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'ReactJS Hello World',
+      title: 'UFC App',
       xhtml: true,
       inject: false,
       template: require('html-webpack-template'),
@@ -32,11 +32,11 @@ module.exports = {
     new ExtractTextPlugin('/css/[name].css', {
       allChunks: true
     })
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
-      },
-    }),
+    // new webpack.DefinePlugin({
+    //   'process.env': {
+    //     NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
+    //   },
+    // }),
   ],
 
   module : {

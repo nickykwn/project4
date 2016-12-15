@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-// import Fighter from './Fighter/Fighter.jsx';
 import Login from './Login/Login.jsx';
 import SignUp from './SignUp/SignUp.jsx';
 import FighterList from './FighterList/FighterList.jsx';
-import SavedFighters from './SavedFighters/SavedFighters.jsx';
-import SavedFightersItem from './SavedFightersItem/SavedFightersItem.jsx';
+import FighterForm from './FighterForm/FighterForm.jsx';
 
 class App extends Component {
   constructor() {
@@ -13,130 +11,59 @@ class App extends Component {
 
     this.state = {
       fighters: [],
+      fighterFormName: '',
+      fighterFormURL: '',
       signup: {
         username: '',
-        password: ''
+        password: '',
       },
       login: {
         loggedIn: false,
         username: '',
-        password: ''
+        password: '',
       },
-      username: '',
-      SavedFighters: []
+      loggedIn: false
     };
   }
 
+  // checks log in status and returns hidden if not logged in
+  checkLogInStatus() {
+    if(!this.state.loggedIn) {
+      return ('hidden');
+    } else {
+      return ('show');
+    }
+  }
+
+  // fetches fighters from the back end
   getFighters() {
-    fetch('/api/fighters')
+    fetch(`/api/fighters`)
     .then(r => r.json())
     .then((data) => {
       this.setState({
         fighters: data,
-      })
-      console.log(this.state);
+      });
+      // console.log(this.state);
     })
     .catch((err) => console.log(err))
   }
 
-///////////////// Rafa's(@rapala61) User Auth Code //////////////////////////////
-  updateFormSignUpUsername(e) {
-    console.log(e.target.value);
-    this.setState({
-      signup: {
-        username: e.target.value,
-        password: this.state.signup.password
-      }
-    });
-  }
-
-  updateFormSignUpPassword(e) {
-    console.log(e.target.value);
-    this.setState({
-      signup: {
-        username: this.state.signup.username,
-        password: e.target.value
-      }
-    });
-  }
-
-  updateFormLogInUsername(e) {
-    this.setState({
-      login: {
-        username: e.target.value,
-        password: this.state.login.password
-      }
-    });
-  }
-
-  updateFormLogInPassword(e) {
-    this.setState({
-      login: {
-        username: this.state.login.username,
-        password: e.target.value
-      }
-    });
-  }
-
-  handleSignUp() {
-    fetch('/api/users', {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      method: 'POST',
-      body: JSON.stringify({
-        username: this.state.signup.username,
-        password: this.state.signup.password
-      })
+  handleRemoveFighter(id) {
+    fetch(`/api/fighters/${id}`, {
+      method: 'DELETE'
     })
-    .then(this.setState({
-      username: this.state.login.username,
-      signup: {
-        username: '',
-        password: ''
-      },
-      signUpFormDisplay: 'hidden'
-    }))
+    .then(() => {
+      let fighters = this.state.fighters.filter((fighter) => {
+        return fighter.id !== id;
+      });
+      this.setState({ fighters });
+    })
     .catch(err => console.log(err));
   }
 
-  handleLogIn() {
-    fetch('/api/auth', {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      method: 'POST',
-      body: JSON.stringify({
-        username: this.state.login.username,
-        password: this.state.login.password
-      })
-    })
-    .then(this.setState({
-      username: this.state.login.username,
-      login: {
-        username: '',
-        password: ''
-      },
-      signUpFormDisplay: 'hidden',
-      logInFormDisplay: 'hidden',
-      userInfo: 'userInfo'
-    }))
-    .then(this.onSuccessfulLogIn)
-    .catch(err => console.log(err));
-  }
-
-  onSuccessfulLogIn(a,b) {
-    console.log(a,b);
-  }
-
-  alertInfo(msg) {
-    alert(msg);
-  }
-
-////////////////////////////////////////////////////////
-
-saveFighters(int, int2, int3, int4, text, text2, text3, text4, url, username) {
-  return fetch(`/fighters`, {
+  // savefighters for the user to database
+  handleSaveFighters(int, int2, int3, int4, text, text2, text3, text4, url, username) {
+  return fetch(`/api/fighters`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -157,70 +84,207 @@ saveFighters(int, int2, int3, int4, text, text2, text3, text4, url, username) {
   .catch(err => console.log(err));
 }
 
-getSavedFighters(username) {
-  return fetch(`/fighters/${username}`, {
-    method: 'GET'
-  })
-  .then(r => r.json())
-  .then((data) => {
+  updateFormName(e) {
     this.setState({
-      savedImages: data
+      fighterFormName: e.target.value
     });
-  })
-  .catch(err => console.log(err));
-}
+  }
 
-handleSaveClick(int, int2, int3, int4, text, text2, text3, text4, url, username) {
-  this.saveFighters(int, int2, int3, int4, text, text2, text3, text4, url, username);
-  setTimeout(() => {this.getSavedFighters(username)}, 300);
-}
+  updateFormURL(e) {
+    this.setState({
+      fighterFormURL: e.target.value
+    });
+  }
 
-loginFunctions(username) {
-  this.getSavedFighters(username);
-  this.handleLogIn();
-}
+///////////////// Rafa's(@rapala61) User Auth Code //////////////////////////////
+  updateFormSignUpUsername(e) {
+    console.log(e.target.value);
+    this.setState({
+      signup: {
+        username: e.target.value,
+        password: this.state.signup.password,
+      },
+    });
+  }
+
+  updateFormSignUpPassword(e) {
+    console.log(e.target.value);
+    this.setState({
+      signup: {
+        username: this.state.signup.username,
+        password: e.target.value,
+      },
+    });
+  }
+
+  updateFormLogInUsername(e) {
+    this.setState({
+      login: {
+        username: e.target.value,
+        password: this.state.login.password,
+      },
+    });
+  }
+
+  updateFormLogInPassword(e) {
+    this.setState({
+      login: {
+        username: this.state.login.username,
+        password: e.target.value,
+      },
+    });
+  }
+
+  handleSignUp() {
+    fetch('/api/users', {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        username: this.state.signup.username,
+        password: this.state.signup.password,
+      }),
+    })
+    .then(this.setState({
+      signUpFormDisplay: 'hidden',
+      logInFormDisplay: 'logInFormDisplay',
+      signup: {
+        username: '',
+        password: ''
+      },
+    }))
+    .then(this.alertInfo('You have successfully signed up!'))
+    .catch(err => console.log(err));
+  }
+
+  handleLogIn() {
+    fetch('/api/auth', {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        username: this.state.login.username,
+        password: this.state.login.password,
+      }),
+    })
+    .then(this.setState({
+      username: this.state.login.username,
+      login: {
+        username: '',
+        password: ''
+      }
+    }))
+    .then(this.onSuccessfulLogIn)
+    .then(this.setState({
+      loggedIn: true
+    }))
+    .catch(err => console.log(err));
+  }
+
+  onSuccessfulLogIn(a,b) {
+    console.log(a, b);
+  }
+
+  alertInfo(msg) {
+    alert(msg);
+  }
+
+  handleFormSubmit() {
+    fetch('/api/fighters', {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        name: this.state.fighterFormName,
+        url: this.state.fighterFormURL
+      })
+    })
+    .then(this.setState({
+      fighterFormName: '',
+      fighterFormURL: ''
+    }))
+    .then(this.getFighters())
+    .catch(err => console.log(err));
+  }
+
+////////////////////////////////////////////////////////
+
+// // fetches the savedFighters for that specific user
+// getSavedFighters(username) {
+//   return fetch(`/api/fighters/${username}`, {
+//     method: 'GET'
+//   })
+//   .then(r => r.json())
+//   .then((data) => {
+//     console.log(data)
+//     // this.setState({
+//     //   SavedFighters: data
+//     // });
+//   })
+//   .catch(err => console.log(err));
+// }
+
+// handles the function that activates the saveFighters function
+// handleSaveClick(int, int2, int3, int4, text, text2, text3, text4, url, username) {
+//   this.saveFighters(int, int2, int3, int4, text, text2, text3, text4, url, username);
+//   setTimeout(() => {this.getSavedFighters(username)}, 300);
+// }
+
+// loginFunctions(username) {
+//   this.getSavedFighters(username);
+//   this.handleLogIn();
+// }
+
+// // delete saved fighter by id
+// deletedSaved(id) {
+//   fetch(`/api/fighters/${id}`, {
+//     method: 'delete'
+//   })
+//   .then(() => {
+//     const SavedFighters = this.state.SavedFighters.filter((image) => {
+//       return image.id !==id;
+//     });
+//       this.setState({ SavedFighters });
+//     })
+//   .catch(err => console.log(err));
+// }
 
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
+      <div id="app-container">
+        <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet"/>
         <header>
         <h1>The Ultimate Fighting Championship</h1>
         </header>
-          <div className="login-container">
-            <SignUp
-              signUpFormDisplay={this.state.signUpFormDisplay}
-              signUpUsername={this.state.signup.username}
-              signUpPassword={this.state.signup.password}
-              updateFormUsername={event => this.updateFormSignUpUsername(event)}
-              updateFormPassword={event => this.updateFormSignUpPassword(event)}
-              handleFormSubmit={() => this.handleSignUp()}
-            />
-            <Login
-              logInFormDisplay={this.state.logInFormDisplay}
-              loginFunctions={() => this.loginFunctions(this.state.login.username)}
-              className={this.state.login.loggedIn ? 'hidden' : ''}
-              logInUsername={this.state.login.username}
-              logInPassWord={this.state.login.password}
-              updateFormUsername={event => this.updateFormLogInUsername(event)}
-              updateFormPassword={event => this.updateFormLogInPassword(event)}
-              handleFormSubmit={() => this.handleLogIn()}
-              getSavedFighters={() => this.getSavedFighters()}
-            />
-          </div>
-            <div className="fighter-container">
-              <FighterList
-                fighters={this.state.fighters}
-                getFighters={this.getFighters.bind(this)}
-              />
-            </div>
-          </div>
-            <SavedFighters
-              username={this.state.username}
-              getSavedFighters={this.getSavedFighters.bind(this)}
-              deletedSaved={this.deletedSaved.bind(this)}
-              SavedFighters={this.state.SavedFighters}
-            />
+        <div className="fighters">
+        <div className="login-container">
+          <SignUp
+            signUpUsername={this.state.signup.username}
+            signUpPassword={this.state.signup.password}
+            updateFormUsername={event => this.updateFormSignUpUsername(event)}
+            updateFormPassword={event => this.updateFormSignUpPassword(event)}
+            handleFormSubmit={() => this.handleSignUp()}
+          />
+          <Login
+            className={this.state.login.loggedIn ? 'hidden' : ''}
+            logInUsername={this.state.login.username}
+            logInPassWord={this.state.login.password}
+            updateFormUsername={event => this.updateFormLogInUsername(event)}
+            updateFormPassword={event => this.updateFormLogInPassword(event)}
+            handleFormSubmit={() => this.handleLogIn()}
+          />
+        </div>
+          <FighterList
+            checkLogInStatus={this.checkLogInStatus.bind(this)}
+            fighters={this.state.fighters}
+            getFighters={this.getFighters.bind(this)}
+            handleRemoveFighter={this.handleRemoveFighter.bind(this)}
+            handleSaveFighters={this.handleSaveFighters.bind(this)}
+          />
+        </div>
       </div>
     );
   }

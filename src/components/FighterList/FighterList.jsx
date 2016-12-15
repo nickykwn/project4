@@ -12,16 +12,27 @@ class FighterList extends Component {
     return this.props.fighters.map((fighter, i) =>
       <FighterItem
         key={i}
-        f_name={fighter.first_name}
-        l_name={fighter.last_name}
+        name={`${fighter.first_name} ${fighter.last_name}`}
+        statid={fighter.statid}
         url={fighter.thumbnail}
-        />
+        // likes={fighter.likes}
+        id={fighter.id}
+        wins={fighter.wins}
+        losses={fighter.losses}
+        weight={fighter.weight_class}
+        title={fighter.title_holder}
+        draws={fighter.draws}
+        fighter_status={fighter.fighter_status}
+        handleRemoveFighter={this.props.handleRemoveFighter}
+        handleSaveFighters={this.props.handleSaveFighters}
+      />
     );
   }
 
   render() {
+    // console.log('in fighterlist ', this.props.fighters)
     return (
-      <div id='fighter-list-container'>
+      <div id='fighter-list-container' className={this.props.checkLogInStatus()}>
         {this.renderFighters()}
       </div>
     );

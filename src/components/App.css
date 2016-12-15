@@ -7,4 +7,24 @@ header {
 
 h1 {
   text-align: center;
+  font-family: 'Anton', sans-serif;
+}
+
+.login-container{
+  width: 175px;
+  margin: 0 auto;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  top: 130px;
+  z-index: 2;
+  color: white;
+  font-family: 'Anton', sans-serif;
+}
+
+.fighters {
+  display: flex;
+  justify-content: center;
 }
