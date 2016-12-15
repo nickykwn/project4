@@ -1,7 +1,13 @@
-#fighter-list-container {
-  align-content: space-around;
+.show {
+/*  align-content: space-around;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;*/
+  display: flex;
+  width: 1000px;
   flex-wrap: wrap;
-  width: 800px;
 }
+
+.hidden {
+  display: none;
+}
+

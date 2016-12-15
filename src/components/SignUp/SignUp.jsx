@@ -5,7 +5,7 @@ class SignUp extends Component {
 
   render() {
     return (
-      <div className={this.props.signUpFormDisplay}>
+      <div id='form-container'>
         <input
           type="text"
           placeholder="username"
@@ -18,9 +18,9 @@ class SignUp extends Component {
           value={this.props.signUpPassword}
           onChange={this.props.updateFormPassword}
         />
-        <div className="formbutton" onClick={this.props.handleFormSubmit}>
-          register
-        </div>
+        <button onClick={this.props.handleFormSubmit}>
+          Register!
+        </button>
       </div>
     );
   }

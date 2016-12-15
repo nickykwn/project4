@@ -4,7 +4,7 @@ import SavedFightersItem from '../SavedFightersItem/SavedFightersItem.jsx';
 export default class SavedFighters extends Component {
 
   renderSavedFighters() {
-    return this.props.SavedFighters.map((result, i) =>
+    return this.props.savedFighters.map((result, i) =>
       <SavedFightersItem
         DeleteButton={this.props.DeleteButton}
         username={this.props.username}
