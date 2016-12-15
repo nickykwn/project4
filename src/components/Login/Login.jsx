@@ -19,7 +19,7 @@ class Login extends Component {
           onChange={this.props.updateFormPassword}
         />
         <button onClick={this.props.handleFormSubmit}>
-          Log in!
+          Log in
         </button>
       </div>
     );

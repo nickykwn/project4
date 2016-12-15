@@ -48,6 +48,7 @@ class App extends Component {
     .catch((err) => console.log(err))
   }
 
+  // function to remove fighters from the database
   handleRemoveFighter(id) {
     fetch(`/api/fighters/${id}`, {
       method: 'DELETE'

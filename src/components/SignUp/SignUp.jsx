@@ -19,7 +19,7 @@ class SignUp extends Component {
           onChange={this.props.updateFormPassword}
         />
         <button onClick={this.props.handleFormSubmit}>
-          Register!
+          Register
         </button>
       </div>
     );
