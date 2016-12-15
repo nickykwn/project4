@@ -26,6 +26,7 @@ class App extends Component {
     };
   }
 
+  // checks log in status and returns hidden if not logged in
   checkLogInStatus() {
     if(!this.state.loggedIn) {
       return ('hidden');
@@ -34,6 +35,7 @@ class App extends Component {
     }
   }
 
+  // fetches fighters from the back end
   getFighters() {
     fetch(`/api/fighters`)
     .then(r => r.json())

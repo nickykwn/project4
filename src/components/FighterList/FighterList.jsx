@@ -13,12 +13,16 @@ class FighterList extends Component {
       <FighterItem
         key={i}
         name={`${fighter.first_name} ${fighter.last_name}`}
+        statid={fighter.statid}
         url={fighter.thumbnail}
         // likes={fighter.likes}
         id={fighter.id}
         wins={fighter.wins}
         losses={fighter.losses}
         weight={fighter.weight_class}
+        title={fighter.title_holder}
+        draws={fighter.draws}
+        fighter_status={fighter.fighter_status}
         handleRemoveFighter={this.props.handleRemoveFighter}
         handleSaveFighters={this.props.handleSaveFighters}
       />

@@ -21,7 +21,6 @@ CREATE TABLE fav_fighters(
   weight_class TEXT NOT NULL,
   fighter_status TEXT NOT NULL,
   fighter_img TEXT NOT NULL,
-  username VARCHAR REFERENCES users(username),
   nickname TEXT NOT NULL
 );
 

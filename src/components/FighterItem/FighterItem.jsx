@@ -11,11 +11,11 @@ const FighterItem = props => (
         <img src={props.url}/>
       </div>
       <div id="button-div">
-      <button onClick={() => props.handleSaveFighters(props.id)}>
-        Save!
+      <button onClick={() => props.handleSaveFighters(props.id, props.wins, props.losses, props.draws, props.last_name, props.first_name, props.weight, props.fighter_status, props.url)}>
+        Save
       </button>
       <button onClick={() => props.handleRemoveFighter(props.id)}>
-        Remove!
+        Remove
       </button>
       </div>
     </div>
